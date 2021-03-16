@@ -5,6 +5,8 @@ system() {
     if [ -f ~/.hushlogin ]; then
         for i in /etc/update-motd.d/*; do if [[ "$i" != "/etc/update-motd.d/98-fsck-at-reboot" && "$i" != "/etc/update-motd.d/removed-motd-files" ]]; then $i; fi; done
     fi
+    echo Windows Subsystem for Linux:
+    wslsys | fold | awk '{ print "  " $0 }'
 }
 
 #Fully upgrade all apt installed software, and delete any unnecessary software
@@ -20,8 +22,6 @@ aptfullupgrade() {
 hello() {
     echo Hello $(whoami)!
     echo
-    echo It is $(date) 
-    echo
-    echo
-    ansiweather -l $(curl -s ipinfo.io/city) -a false | sed 's/^ //g'
+    echo It is $(date)
+    ansiweather -l $(curl -s ipinfo.io/city) -a false | sed 's/^ //g
 }
